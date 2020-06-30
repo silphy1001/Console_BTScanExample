@@ -2,15 +2,16 @@
 //
 
 #include <iostream>
+#include <locale>
 #include <WinSock2.h>
 #include <ws2bth.h>
 
-void resultShow(int wsaRetVal, const std::string &funcName)
+void resultShow(int funcRetVal, const std::wstring &funcName)
 {
-    if (wsaRetVal) { // 戻り値が0でない時はエラー
+    if (funcRetVal) { // 戻り値が0でない時はエラー
         int wsaGLERet = WSAGetLastError();
         LPVOID msg;
-        std::cout << funcName << " failed." << std::endl;
+        std::wcout << funcName << L" failed, returns: " << funcRetVal << std::endl;
 
         int fmRet = FormatMessage(
             FORMAT_MESSAGE_ALLOCATE_BUFFER |
@@ -24,30 +25,32 @@ void resultShow(int wsaRetVal, const std::string &funcName)
             nullptr
         );
         if (!fmRet) {
-            std::cout << "GetLastError() failed, returns: " << GetLastError() << std::endl;
+            std::wcout << L"GetLastError() failed, returns: " << GetLastError() << std::endl;
         }
         else {
-            std::cout << msg << std::endl;
+            std::wcout << (LPWSTR)msg << std::endl;
         }
+        LocalFree(msg);
     }
     else {
-        std::cout << funcName << " succeeded!" << std::endl;
+        std::wcout << funcName << L" succeeded!" << std::endl;
     }
 }
 
 int main(void)
 {
-    std::cout << "Hello Bluetooth World!" << std::endl;
+    std::wcout.imbue(std::locale(""));
+    std::wcout << L"Hello Bluetooth World!" << std::endl;
 
     WORD versionRequested = MAKEWORD(2, 2);
     WSADATA wsaData = { 0 };
     int ret = 0;
 
     ret = WSAStartup(versionRequested, &wsaData);
-    resultShow(ret, "WSAStartup()");
+    resultShow(ret, L"WSAStartup()");
 
     ret = WSACleanup();
-    resultShow(ret, "WSACleanup()");
+    resultShow(ret, L"WSACleanup()");
 
     return EXIT_SUCCESS;
 }
