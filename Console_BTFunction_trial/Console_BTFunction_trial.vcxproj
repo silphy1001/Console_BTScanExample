@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{14a8487d-08c8-4319-8f86-72c87e95c98c}</ProjectGuid>
-    <RootNamespace>ConsoleBTScanExample</RootNamespace>
+    <ProjectGuid>{2871664b-bd35-423c-907b-97685b35ec64}</ProjectGuid>
+    <RootNamespace>ConsoleBTFunctiontrial</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -141,7 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Console_BTScanExample.cpp" />
+    <ClCompile Include="Console_BTFunction_trial.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
